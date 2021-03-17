@@ -4,32 +4,17 @@
         <div class="p-4 m-4">
             <div class="col-md-7 mx-auto border rounded p-3">
                 <form method="POST">
-                    <h3 class="text-center">Create An Account</h3>
+                    <h3 class="text-center">Login</h3>
                     {% csrf_token %}
                     {% if error %}
                     <div class="alert alert-danger" role="alert">
                         {{ error }}
                     </div>
                     {% endif %}
-                    <!-- firstname -->
-                    <div class="form-group">
-                        <label for="fname">First Name:</label>
-                        <input type="text" value="{{ values.fname }}" name="fname" class="form-control form-control-sm" placeholder="Enter your Firstname">
-                    </div>
-                    <!-- lastname -->
-                    <div class="form-group">
-                        <label for="lname">Last Name:</label>
-                        <input type="text" value="{{ values.lname }}" name="lname" class="form-control form-control-sm" placeholder="Enter your Lastname">
-                    </div>
                     <!-- email -->
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input required type="email" value="{{ values.email }}" name="email" class="form-control form-control-sm" placeholder="Enter your email ID">
-                    </div>
-                    <!-- contact number -->
-                    <div class="form-group">
-                        <label for="phone">Contact Number:</label>
-                        <input type="number" value="{{ values.phone }}" name="phone" class="form-control form-control-sm" placeholder="Enter your contact number">
                     </div>
                     <!-- password -->
                     <div class="form-group">
@@ -38,11 +23,11 @@
                     </div>
                     <!-- submit btn -->
                     <div class="form-group text-center">
-                        <input class="btn btn-primary" type="submit" value="Sign up">
+                        <input class="btn btn-primary" type="submit" value="Login">
                     </div>
                 </form>
                 <p class="text-center">
-                    <a class="btn btn-info" href="{% url 'login' %}">Already have an Account? Login</a>
+                    <a class="btn btn-info" href="{% url 'register' %}">Need an Account? Register</a>
                 </p>
             </div>
         </div>

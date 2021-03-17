@@ -70,3 +70,24 @@ def register(request):
                 'values': curr_values
             }
             return render(request, 'store/register.html', data)
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'store/login.html')
+    else:
+        error_msg = None
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        customer = Customer.getCustomerByEmail(email)
+        if customer:
+            flag = check_password(password, customer.password)
+            if flag:
+                return redirect('store-home')
+            else:
+                error_msg = 'Invalid password for the mentioned EmailID'
+        else:
+            error_msg = 'EmailID is not registered! Please register on the website!'
+        data = {
+            'error': error_msg,
+        }
+        return render(request, 'store/login.html', data)
