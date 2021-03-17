@@ -14,9 +14,20 @@
             -ms-user-select: none; /* IE 10+ */
             user-select: none; /* Likely future */  
           }
+          .card{
+            width: 16rem;
+          }
           .card > img{
             width: 15rem;
             height: 200px;
+            margin: 0.5rem auto;
+          }
+          input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input[type=number] {
+            -moz-appearance: textfield;
           }
         </style>
     </head>
@@ -29,9 +40,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left navbar -->
                 <ul class="navbar-nav mx-auto">
-                    <a class="navbar-brand" href="#">FreshMart</a>
+                    <a class="navbar-brand" href="{% url 'store-home' %}">FreshMart</a>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{% url 'store-home' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -40,7 +51,7 @@
                 <!-- Right navbar -->
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Cart</a>
