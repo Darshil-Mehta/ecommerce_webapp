@@ -52,14 +52,16 @@ def register(request):
         lname = request.POST.get('lname')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
+        address = request.POST.get('address')
         password = request.POST.get('password')
         curr_values = {
             'fname': fname,
             'lname': lname,
             'email': email,
             'phone': phone,
+            'address': address
         }
-        customer = Customer(fname= fname, lname= lname, email= email, contact_no= phone, password= password)
+        customer = Customer(fname= fname, lname= lname, email= email, contact_no= phone, password= password, address= address)
         em = None
         if not fname:
             em = 'Firstname field required!'
@@ -77,6 +79,8 @@ def register(request):
             em = 'Please enter a secured password!'
         elif len(password) < 4:
             em = 'Password length should be atleast 4 character long!'
+        elif len(address) < 10:
+            em = 'Please mention that acturate address with atleast 10 characters'
         elif customer.isEmailUsed():
             em = 'Email ID is already registered! Please try to login.'
         elif customer.isContactUsed():

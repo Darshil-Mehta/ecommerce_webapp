@@ -4,6 +4,7 @@ class Customer(models.Model):
     fname = models.CharField(max_length=20)
     lname = models.CharField(max_length=20)
     email = models.EmailField()
+    address = models.TextField(default='')
     contact_no = models.CharField(max_length=15)
     password = models.CharField(max_length=500)
 

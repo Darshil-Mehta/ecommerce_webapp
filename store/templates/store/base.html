@@ -56,6 +56,9 @@
                 </ul>
                 <!-- Right navbar -->
                 <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store-cart' %}">Cart</a>
+                  </li>
                   {% if request.session.customer_id %}
                   <li class="nav-item">
                     <a class="nav-link" href="#">Orders</a>
@@ -67,9 +70,6 @@
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                   </li>
                   {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'store-cart' %}">Cart</a>
-                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
                   </li>
