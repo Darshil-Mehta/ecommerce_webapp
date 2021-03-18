@@ -1,0 +1,51 @@
+{% extends "store/base.html" %}
+{% block content %}
+{% load cart %}
+{% load currency %}
+    <div class="container">
+        <h1 class="my-3">My Cart</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 100px;">
+                        Serial No.
+                    </th>
+                    <th style="width: 100px;">
+                        Image
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total Cost
+                    </th>
+                </tr>
+            </thead>
+            {% for cd in cartdata %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><img style="width: 80px;" class="rounded-circle" src="{{ cd.image.url }}" alt="product-image"></td>
+                    <td>{{ cd.name }}</td>
+                    <td>{{ cd.price|currency_converter }}</td>
+                    <td>{{ cd|product_quantity:request.session.cart }}</td>
+                    <td>{{ cd|single_item_cost:request.session.cart|currency_converter }}</td>
+                </tr>
+            {% endfor %}
+            <tfoot class>
+                <tr>
+                    <th colspan="5" class="text-right pr-5">Total</th>
+                    <th>{{ cartdata|total_cart_cost:request.session.cart|currency_converter }}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="">
+            <a class="btn btn-info float-right" href="#">Check Out</a>
+        </div>
+    </div>
+{% endblock %}

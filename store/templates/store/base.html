@@ -14,6 +14,10 @@
             -ms-user-select: none; /* IE 10+ */
             user-select: none; /* Likely future */  
           }
+          #brandlogo{
+            width: 150px;
+            height: 40px;
+          }
           .card{
             width: 16rem;
           }
@@ -33,14 +37,16 @@
     </head>
     <body>
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left navbar -->
-                <ul class="navbar-nav mx-auto">
-                    <a class="navbar-brand" href="{% url 'store-home' %}">FreshMart</a>
+                <ul class="navbar-nav">
+                    <a class="navbar-brand p-0" href="{% url 'store-home' %}">
+                      <img id="brandlogo" src="https://freshmart.com.np/assets/uploads/company/setting/2019-06-02-05-54-31-freshmart-logo.png" alt="brandlogo">
+                    </a>
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'store-home' %}">Home</a>
                     </li>
@@ -49,17 +55,28 @@
                     </li>
                 </ul>
                 <!-- Right navbar -->
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                </ul>
+                <ul class="navbar-nav ml-auto">
+                  {% if request.session.customer_id %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store-cart' %}">Cart</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  {% endif %}
             </div>
         </nav>
 

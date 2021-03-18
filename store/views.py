@@ -5,12 +5,11 @@ from .models.category import Category
 from .models.customer import Customer
 from django.contrib.auth.hashers import make_password, check_password
 
-# -products- stores all the products 
-# -categories- stores all the catergories from the database
-# -cid- gets the current category id and calls its respective products
-
 def home(request):
     if request.method == 'GET':
+        cart = request.session.get('cart')
+        if not cart:
+            request.session['cart'] = {}
         products = None 
         categories = Category.get_all_categories()
         cid = request.GET.get('category')
@@ -26,26 +25,23 @@ def home(request):
     else:
         product = request.POST.get('product')
         remove = request.POST.get('remove')
-        print('email -> ',request.session.get('customer_email'))
-        print('products -> ',product)
         cart = request.session.get('cart')
-        if cart: # () if cart is presesnt
-            quantity = cart.get(product) # get the quantity that user wants to buy
-            if quantity: # (.) if the user has added that item into the cart
-                if remove: # (..) check if user want to remove
-                    if quantity <= 1: # (...) if product quantity less than 1 then remove item from cart
-                        cart.pop(product) # else the quantity would be zero but it would still remain in cart
-                    else: # (...) else just subtract the quantity by 1
+        if cart:
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(product)
+                    else:
                         cart[product] = quantity-1
-                else: # (..) else the user wants to add
+                else:
                     cart[product] = quantity+1
-            else: # (.) else not then initialize the item by 1
+            else:
                 cart[product] = 1
-        else: # () else make the user a new cart
+        else:
             cart = {}
             cart[product] = 1
         request.session['cart'] = cart
-        print('cart ->',cart)
         return redirect('store-home')
 
 def register(request):
@@ -118,3 +114,15 @@ def login(request):
             'error': error_msg,
         }
         return render(request, 'store/login.html', data)
+
+def logout(request):
+    request.session.clear()
+    return redirect('login')
+
+def cart(request):
+    ids = list(request.session.get('cart').keys())
+    cartdata = Product.get_products_for_cart(ids)
+    data = {
+        'cartdata': cartdata,
+    }
+    return render(request, 'store/cart.html', data)

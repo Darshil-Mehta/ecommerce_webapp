@@ -8,6 +8,9 @@ class Product(models.Model):
     description = models.CharField(max_length=200, default='')
     image = models.ImageField(upload_to='products')
 
+    def __str__(self):
+        return self.name
+
     @staticmethod
     def get_all_products():
         return Product.objects.all()
@@ -18,3 +21,7 @@ class Product(models.Model):
             return Product.objects.filter(category=cid)
         else:
             return Product.get_all_products()
+    
+    @staticmethod
+    def get_products_for_cart(ids):
+        return Product.objects.filter(id__in=ids)

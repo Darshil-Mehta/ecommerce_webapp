@@ -1,9 +1,9 @@
 {% extends "store/base.html" %}
 {% block content %}
 {% load cart %}
-<div class="container-fluid mt-3">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 mx-auto">
+        <div class="col-md-3 mx-auto mt-3">
             <div class="list-group">
                 <a class="list-group-item list-group-item-action" href="/">All Products</a>
                 {% for c in categories %}
@@ -11,7 +11,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div id="products" class="col-md-9 mx-auto">
+        <div id="products" class="col-md-9 mx-auto mt-3">
             <div class="row mx-auto">
                 {% for p in products %}
                     <div id="{{ p.id }}" class="card mx-auto mb-3">
