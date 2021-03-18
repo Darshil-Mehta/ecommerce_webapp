@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models.product import Product
 from .models.category import Category
 from .models.customer import Customer
+from .models.orders import Order
 from django.contrib.auth.hashers import make_password, check_password
 
 def home(request):
@@ -130,3 +131,16 @@ def cart(request):
         'cartdata': cartdata,
     }
     return render(request, 'store/cart.html', data)
+
+def checkout(request):
+    phone = request.POST.get('phone')
+    customer_id = request.session.get('customer_id')
+    email = request.session.get('customer_email')
+    address = Customer.getAddressByEmail(email)
+    cart = request.session.get('cart')
+    products = Product.get_products_for_cart(list(cart.keys()))
+    for product in products:
+        order = Order(product= product, customer= Customer(id= customer_id), quantity= cart.get(str(product.id)), price= product.price, address= address, phone= phone)
+        order.PlaceOrder()
+        request.session['cart'] = {}
+    return redirect('store-cart')
