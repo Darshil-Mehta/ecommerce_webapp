@@ -1,6 +1,7 @@
 {% extends "store/base.html" %}
 {% block content %}
 {% load cart %}
+{% load currency %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 mx-auto mt-3">
@@ -21,7 +22,7 @@
                             <p class="card-text">{{ p.description }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ p.price }}</li>
+                            <li class="list-group-item">Price {{ p.price|currency_converter }}</li>
                             <li class="list-group-item">{{ p.category }}</li>
                         </ul>
                         <div class="card-footer p-0">
