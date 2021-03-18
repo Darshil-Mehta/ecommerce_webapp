@@ -1,5 +1,6 @@
 {% extends "store/base.html" %}
 {% block content %}
+{% load cart %}
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-md-3 mx-auto">
@@ -24,8 +25,29 @@
                             <li class="list-group-item">{{ p.price }}</li>
                             <li class="list-group-item">{{ p.category }}</li>
                         </ul>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <div class="card-footer p-0">
+                            {% if p|is_in_cart:request.session.cart %}
+                            <div class="row mx-0">
+                                <form method="POST" class="col-2 p-0">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name="product" value="{{ p.id }}"/>
+                                    <input hidden type="text" name="remove" value="True"/>
+                                    <input value=" - " type="submit" class="btn btn-primary"/>
+                                </form>
+                                <div class="text-center col-8 my-auto">{{ p|product_quantity:request.session.cart }} in cart</div>
+                                <form method="POST" class="col-2 p-0">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name="product" value="{{ p.id }}"/>
+                                    <input value=" + " type="submit" class="btn btn-primary"/>
+                                </form>
+                            </div>
+                            {% else %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input hidden type="text" name="product" value="{{ p.id }}"/>
+                                <input type="submit" class="btn btn-primary col" value="Add to Cart"/>
+                            </form>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
