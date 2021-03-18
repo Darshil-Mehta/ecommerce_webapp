@@ -144,3 +144,11 @@ def checkout(request):
         order.PlaceOrder()
         request.session['cart'] = {}
     return redirect('store-cart')
+
+def orderview(request):
+    id = request.session.get('customer_id')
+    all_orders = Order.getAllOrdersByID(id)
+    data = {
+        'allorders': all_orders,
+    }
+    return render(request, 'store/orders.html', data)

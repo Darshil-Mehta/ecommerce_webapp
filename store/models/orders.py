@@ -14,3 +14,7 @@ class Order(models.Model):
 
     def PlaceOrder(self):
         self.save()
+
+    @staticmethod
+    def getAllOrdersByID(id):
+        return Order.objects.filter(customer= id)

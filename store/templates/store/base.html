@@ -61,7 +61,7 @@
                   </li>
                   {% if request.session.customer_id %}
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
+                    <a class="nav-link" href="{% url 'store-orders-view' %}">Orders</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>

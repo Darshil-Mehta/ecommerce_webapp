@@ -27,4 +27,12 @@ def total_cart_cost(cartdata, cart):
     sum = 0
     for cd in cartdata:
         sum += single_item_cost(cd, cart)
-    return sum 
+    return sum
+
+@register.filter(name='order_row_cost')
+def order_row_cost(num1, num2):
+    return num1 * num2
+
+@register.filter(name='currency_converter')
+def currency_converter(cost):
+    return "₹. "+str(cost)

@@ -1,0 +1,41 @@
+{% extends "store/base.html" %}
+{% block content %}
+{% load cart %}
+    <div class="container">
+        <h1 class="my-3">My Orders</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 100px;">
+                        Serial No.
+                    </th>
+                    <th style="width: 100px;">
+                        Image
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total Cost
+                    </th>
+                </tr>
+            </thead>
+            {% for ao in allorders %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><img style="width: 80px;" class="rounded-circle" src="{{ ao.product.image.url }}" alt="product-image"></td>
+                    <td>{{ ao.product.name }}</td>
+                    <td>{{ ao.price|currency_converter }}</td>
+                    <td>{{ ao.quantity }}</td>
+                    <td>{{ ao.price|order_row_cost:ao.quantity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
