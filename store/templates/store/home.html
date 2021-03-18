@@ -11,11 +11,10 @@
                 {% endfor %}
             </div>
         </div>
-
         <div id="products" class="col-md-9 mx-auto">
             <div class="row mx-auto">
                 {% for p in products %}
-                    <div class="card mx-auto mb-3">
+                    <div id="{{ p.id }}" class="card mx-auto mb-3">
                         <img class="card-img-top" src="{{p.image.url}}" alt="img">
                         <div class="card-body">
                             <h5 class="card-title">{{ p.name }}</h5>
@@ -28,21 +27,21 @@
                         <div class="card-footer p-0">
                             {% if p|is_in_cart:request.session.cart %}
                             <div class="row mx-0">
-                                <form method="POST" class="col-2 p-0">
+                                <form action="/#{{ p.id }}" method="POST" class="col-2 p-0">
                                     {% csrf_token %}
                                     <input hidden type="text" name="product" value="{{ p.id }}"/>
                                     <input hidden type="text" name="remove" value="True"/>
                                     <input value=" - " type="submit" class="btn btn-primary"/>
                                 </form>
                                 <div class="text-center col-8 my-auto">{{ p|product_quantity:request.session.cart }} in cart</div>
-                                <form method="POST" class="col-2 p-0">
+                                <form action="/#{{ p.id }}" method="POST" class="col-2 p-0">
                                     {% csrf_token %}
                                     <input hidden type="text" name="product" value="{{ p.id }}"/>
                                     <input value=" + " type="submit" class="btn btn-primary"/>
                                 </form>
                             </div>
                             {% else %}
-                            <form method="POST">
+                            <form action="/#{{ p.id }}" method="POST">
                                 {% csrf_token %}
                                 <input hidden type="text" name="product" value="{{ p.id }}"/>
                                 <input type="submit" class="btn btn-primary col" value="Add to Cart"/>
