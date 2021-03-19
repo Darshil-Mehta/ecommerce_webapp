@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models.product import Product
 from .models.category import Category
 from .models.customer import Customer
+from .models.profile import Profile
 from .models.orders import Order
 from django.contrib.auth.hashers import make_password, check_password
 
@@ -154,3 +155,30 @@ def orderview(request):
         'allorders': all_orders,
     }
     return render(request, 'store/orders.html', data)
+
+def profile(request):
+    if request.method == 'GET':
+        customer_email = request.session.get('customer_email')
+        cid = request.session.get('customer_id')
+        user = Customer.objects.filter(email=customer_email).first()
+        profile = Profile.objects.filter(customer=cid).first()
+        data = {
+            'customer': user,
+            'profile': profile,
+        }
+        return render(request, 'store/profile.html', data)
+    else:
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        image = request.POST.get('profile')
+        customer_email = request.session.get('customer_email')
+        user = Customer.objects.filter(email=customer_email).first()
+        if address:
+            if len(address) > 10:
+                user.address = address
+                user.save()
+        elif phone:
+            if len(phone) == 10:
+                user.contact_no = phone
+                user.save()
+        return redirect('customer-profile')

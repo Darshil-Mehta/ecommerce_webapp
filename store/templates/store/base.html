@@ -44,36 +44,38 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left navbar -->
                 <ul class="navbar-nav">
-                    <a class="navbar-brand p-0" href="{% url 'store-home' %}">
+                    <a class="navbar-brand p-0 mx-2" href="{% url 'store-home' %}">
                       <img id="brandlogo" src="https://freshmart.com.np/assets/uploads/company/setting/2019-06-02-05-54-31-freshmart-logo.png" alt="brandlogo">
                     </a>
-                    <li class="nav-item active">
+                    <li class="nav-item active mx-2">
                         <a class="nav-link" href="{% url 'store-home' %}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="#">About</a>
                     </li>
                 </ul>
                 <!-- Right navbar -->
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'store-cart' %}">Cart</a>
+                  <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'store-cart' %}">
+                      Cart <span class="badge badge-success">{{ request.session.cart.keys|length }}</span>
+                    </a>
                   </li>
                   {% if request.session.customer_id %}
-                  <li class="nav-item">
+                  <li class="nav-item mx-2">
                     <a class="nav-link" href="{% url 'store-orders-view' %}">Orders</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                  <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'customer-profile' %}">Profile</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item mx-2">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                   </li>
                   {% else %}
-                  <li class="nav-item">
+                  <li class="nav-item mx-2">
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item mx-2">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                   </li>
                   {% endif %}
