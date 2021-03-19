@@ -14,7 +14,7 @@ class AdminCustomer(admin.ModelAdmin):
     list_display = ['fname','lname','address','email','contact_no']
 
 class AdminOrder(admin.ModelAdmin):
-    list_display = ['product','quantity','price','customer','date']
+    list_display = ['product','quantity','price','status','customer','date']
 
 admin.site.register(Product, AdminProduct)
 admin.site.register(Category, AdminCategory)

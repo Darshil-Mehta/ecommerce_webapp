@@ -24,6 +24,9 @@
                     <th>
                         Total Cost
                     </th>
+                    <th>
+                        Status
+                    </th>
                 </tr>
             </thead>
             {% for ao in allorders %}
@@ -31,9 +34,14 @@
                     <td>{{ forloop.counter }}</td>
                     <td><img style="width: 80px;" class="rounded-circle" src="{{ ao.product.image.url }}" alt="product-image"></td>
                     <td>{{ ao.product.name }}</td>
-                    <td>{{ ao.price|currency_converter }}</td>
+                    <td>{{ ao.product.price|currency_converter }}</td>
                     <td>{{ ao.quantity }}</td>
-                    <td>{{ ao.price|order_row_cost:ao.quantity }}</td>
+                    <td>{{ ao.product.price|order_row_cost:ao.quantity }}</td>
+                    {% if ao.status %}
+                    <td><small class="badge badge-success">accepted</small></td>
+                    {% else %}
+                    <td><small class="badge badge-warning">pending</small></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

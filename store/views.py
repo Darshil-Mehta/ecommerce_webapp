@@ -140,7 +140,9 @@ def checkout(request):
     cart = request.session.get('cart')
     products = Product.get_products_for_cart(list(cart.keys()))
     for product in products:
-        order = Order(product= product, customer= Customer(id= customer_id), quantity= cart.get(str(product.id)), price= product.price, address= address, phone= phone)
+        p = product.price
+        q = cart.get(str(product.id))
+        order = Order(product= product, customer= Customer(id= customer_id), quantity= q, price= p*q, address= address, phone= phone)
         order.PlaceOrder()
         request.session['cart'] = {}
     return redirect('store-cart')

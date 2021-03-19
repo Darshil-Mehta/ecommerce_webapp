@@ -11,10 +11,11 @@ class Order(models.Model):
     date = models.DateField(default=datetime.today)
     address = models.TextField(default='')
     phone = models.CharField(max_length=15, default='')
+    status = models.BooleanField(default=False)
 
     def PlaceOrder(self):
         self.save()
 
     @staticmethod
     def getAllOrdersByID(id):
-        return Order.objects.filter(customer= id)
+        return Order.objects.filter(customer= id).order_by('-date')
