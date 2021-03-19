@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from .models.product import Product
 from .models.category import Category
 from .models.customer import Customer
 from .models.profile import Profile
 from .models.orders import Order
+from .forms import ProfileUpdateForm
 from django.contrib.auth.hashers import make_password, check_password
 
 def home(request):
@@ -162,18 +163,26 @@ def profile(request):
         cid = request.session.get('customer_id')
         user = Customer.objects.filter(email=customer_email).first()
         profile = Profile.objects.filter(customer=cid).first()
+        form = ProfileUpdateForm(instance= profile)
+        # instance=request.user.profile
         data = {
             'customer': user,
             'profile': profile,
+            'form': form,
         }
         return render(request, 'store/profile.html', data)
     else:
         address = request.POST.get('address')
         phone = request.POST.get('phone')
-        image = request.POST.get('profile')
         customer_email = request.session.get('customer_email')
         user = Customer.objects.filter(email=customer_email).first()
-        if address:
+        cid = request.session.get('customer_id')
+        profile = Profile.objects.filter(customer=cid).first()
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        # instance=request.user.profile
+        if form.is_valid():
+            form.save()
+        elif address:
             if len(address) > 10:
                 user.address = address
                 user.save()
