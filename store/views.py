@@ -6,6 +6,7 @@ from .models.customer import Customer
 from .models.profile import Profile
 from .models.orders import Order
 from .forms import ProfileUpdateForm
+from .auth import auth_middleware
 from django.contrib.auth.hashers import make_password, check_password
 
 def home(request):
@@ -149,6 +150,7 @@ def checkout(request):
         request.session['cart'] = {}
     return redirect('store-cart')
 
+@auth_middleware
 def orderview(request):
     id = request.session.get('customer_id')
     all_orders = Order.getAllOrdersByID(id)
@@ -157,6 +159,7 @@ def orderview(request):
     }
     return render(request, 'store/orders.html', data)
 
+@auth_middleware
 def profile(request):
     if request.method == 'GET':
         customer_email = request.session.get('customer_email')
@@ -164,7 +167,6 @@ def profile(request):
         user = Customer.objects.filter(email=customer_email).first()
         profile = Profile.objects.filter(customer=cid).first()
         form = ProfileUpdateForm(instance= profile)
-        # instance=request.user.profile
         data = {
             'customer': user,
             'profile': profile,
@@ -179,7 +181,6 @@ def profile(request):
         cid = request.session.get('customer_id')
         profile = Profile.objects.filter(customer=cid).first()
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
-        # instance=request.user.profile
         if form.is_valid():
             form.save()
         elif address:
