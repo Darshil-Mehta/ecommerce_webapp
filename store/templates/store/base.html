@@ -33,6 +33,19 @@
           input[type=number] {
             -moz-appearance: textfield;
           }
+          .footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+          }
         </style>
     </head>
     <body>
@@ -63,6 +76,9 @@
                   </li>
                   {% if request.session.customer_id %}
                   <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'payment' %}">Pay Here</a>
+                  </li>
+                  <li class="nav-item mx-2">
                     <a class="nav-link" href="{% url 'store-orders-view' %}">Orders</a>
                   </li>
                   <li class="nav-item mx-2">
@@ -85,6 +101,16 @@
     <!-- Main Content -->
       {% block content %}{% endblock %}
 
+    <!-- Footer -->
+    <footer class="footer">
+      <div>
+        Incase of any problem, please write us: <a href="{% url 'feedback' %}">Feedback</a>
+      </div>
+      <div>
+        <p>Developed By | Darshil, Yash and Ishit</p>
+      </div>
+    </footer>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

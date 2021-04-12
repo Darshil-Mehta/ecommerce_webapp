@@ -1,7 +1,7 @@
 {% extends "store/base.html" %}
 {% block content %}
 {% load cart %}
-    <div class="container">
+    <div class="container mb-5">
         <h1 class="my-3">My Orders</h1>
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -45,5 +45,8 @@
                 </tr>
             {% endfor %}
         </table>
+        <button class="btn btn-primary mb-3">
+            <a href="{% url 'feedback' %}" style="color: white; text-decoration: none;">Feedback</a>
+        </button>
     </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends "store/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="col-md-6 border rounded mx-auto my-4 text-center">
+        <h1>Feedback Form</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ feedback_form|crispy }}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -5,7 +5,8 @@ from .models.category import Category
 from .models.customer import Customer
 from .models.profile import Profile
 from .models.orders import Order
-from .forms import ProfileUpdateForm
+from .models.feedback import Feedback
+from .forms import ProfileUpdateForm, FeedbackForm
 from .auth import auth_middleware
 from django.contrib.auth.hashers import make_password, check_password
 
@@ -192,3 +193,21 @@ def profile(request):
                 user.contact_no = phone
                 user.save()
         return redirect('customer-profile')
+
+def feedback(request):
+    if request.method == 'GET':
+        data = {
+            'feedback_form': FeedbackForm()
+        }
+        return render(request, 'store/feedback.html', data)
+    else:
+        problem_issue = request.POST.get('problem_issue')
+        product_name = request.POST.get('product_name')
+        customer_email = request.session.get('customer_email')
+        user = Customer.objects.filter(email=customer_email).first()
+        feedback = Feedback(product_name=product_name, problem_issue=problem_issue, customer=user)
+        feedback.save()
+        return redirect('store-home')
+
+def payment(request):
+    return render(request, 'store/payment.html')
