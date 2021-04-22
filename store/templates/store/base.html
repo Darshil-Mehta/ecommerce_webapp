@@ -111,6 +111,15 @@
       </div>
     </footer>
     
+    <script>
+      function myFunction(){
+        console.log("hi");
+        var x = Math.floor((Math.random() * 99999) + 1);
+        document.getElementById("demo").innerHTML = "<img src='https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" + x + "'>";
+        console.log("bye");
+      }
+    </script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

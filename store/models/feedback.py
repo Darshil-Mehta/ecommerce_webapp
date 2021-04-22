@@ -1,6 +1,5 @@
 from django.db import models
 from .customer import Customer
-from .product import Product
 
 class Feedback(models.Model):
     problem_issue = models.TextField(max_length=256, default='')
