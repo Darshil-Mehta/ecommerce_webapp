@@ -4,12 +4,12 @@
 <div class="container">
     <div class="col-md-6 border rounded mx-auto my-4 text-center">
         <h1>Feedback Form</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ feedback_form|crispy }}
+                 {{ feedback_form|crispy }}
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Submit</button>
-            </div>
+            </div> 
         </form>
     </div>
 </div>

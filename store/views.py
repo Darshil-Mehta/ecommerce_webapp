@@ -195,19 +195,20 @@ def profile(request):
         return redirect('customer-profile')
 
 def feedback(request):
-    if request.method == 'GET':
-        data = {
-            'feedback_form': FeedbackForm()
-        }
-        return render(request, 'store/feedback.html', data)
-    else:
-        problem_issue = request.POST.get('problem_issue')
-        product_name = request.POST.get('product_name')
+    if request.method == 'POST':
         customer_email = request.session.get('customer_email')
         user = Customer.objects.filter(email=customer_email).first()
-        feedback = Feedback(product_name=product_name, problem_issue=problem_issue, customer=user)
-        feedback.save()
+        pname = request.POST.get('product_name')
+        pissue = request.POST.get('problem_issue')
+        pimg = request.FILES.get('feedback_image')
+        form = Feedback(product_name=pname, problem_issue=pissue, feedback_image=pimg, customer=user)
+        form.save()
         return redirect('store-home')
+    else:
+        feedbackformdata = {
+             'feedback_form': FeedbackForm()
+         }
+    return render(request, 'store/feedback.html', feedbackformdata)
 
 def payment(request):
     return render(request, 'store/payment.html')

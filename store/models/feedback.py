@@ -7,3 +7,4 @@ class Feedback(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date_issue = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)
+    feedback_image = models.FileField(default="no_img.png", upload_to='feedback_images')

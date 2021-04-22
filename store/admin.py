@@ -19,7 +19,7 @@ class AdminOrder(admin.ModelAdmin):
     list_display = ['product','quantity','price','status','customer','date']
 
 class AdminFeedback(admin.ModelAdmin):
-    list_display = ['customer','status','product_name','problem_issue','date_issue']
+    list_display = ['customer','status','product_name','problem_issue','date_issue', 'feedback_image']
 
 admin.site.register(Product, AdminProduct)
 admin.site.register(Category, AdminCategory)

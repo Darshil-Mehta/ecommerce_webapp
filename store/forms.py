@@ -11,4 +11,4 @@ class ProfileUpdateForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ['product_name', 'problem_issue']
+        fields = ['product_name', 'problem_issue', 'feedback_image']
