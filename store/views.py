@@ -198,7 +198,9 @@ def feedback(request):
     if request.method == 'POST':
         customer_email = request.session.get('customer_email')
         user = Customer.objects.filter(email=customer_email).first()
-        pname = request.POST.get('product_name')
+        p = request.POST.get('product_name')
+        print(p)
+        pname = Product.objects.filter(id=p).first()
         pissue = request.POST.get('problem_issue')
         pimg = request.FILES.get('feedback_image')
         form = Feedback(product_name=pname, problem_issue=pissue, feedback_image=pimg, customer=user)
@@ -212,3 +214,6 @@ def feedback(request):
 
 def payment(request):
     return render(request, 'store/payment.html')
+
+def about(request):
+    return render(request, 'store/about.html')
