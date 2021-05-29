@@ -24,12 +24,21 @@ Functionalities:
 
 To run this project :
 Clone the project -
+  
   Git clone => https://github.com/Darshil-Mehta/ecommerce_webapp.git
+  
   Steps to be followed to use this application:
+    
     Install any text editor e.g. -> Virtual Studio Code
+    
     Install django from terminal -> pip install django
+    
     Make a new project named digital_library -> django-admin startproject digital_library .
+    
     Paste all the folders in this project
+    
     Run this command in the terminal -> python manage.py runserver
+    
     Open any web brower and search -> localhost:8000/home
+    
     Your project is ready!!!
