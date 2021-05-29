@@ -1,4 +1,7 @@
+#Fresh Mart
+
 About:
+
 Now-a-days buying grocery items is a big task. People have to spend lot of time buying
 grocery items .Every organization whether small retail store or a big supermarket has
 challenges to manage information of customer, grocery products this leads to lot of
@@ -12,6 +15,7 @@ information they want with just a click because of its smooth UI designed to red
 work.
 
 Functionalities:
+
 1.	Manage grocery products: adding, deleting, updating.
 2.	Storing customer information, which can be later referred for retrieving data.
 3.	Costs of the products can be revised by admin.
