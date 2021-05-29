@@ -33,7 +33,7 @@ Clone the project -
     
     Install django from terminal -> pip install django
     
-    Make a new project named digital_library -> django-admin startproject digital_library .
+    Make a new project named ecommerce_webapp -> django-admin startproject ecommerce_webapp .
     
     Paste all the folders in this project
     
